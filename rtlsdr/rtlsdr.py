@@ -409,6 +409,18 @@ class BaseRtlSdr(object):
 
         return result
 
+    def set_dithering(self, dithering):
+        """Enable direct sampling.  ### TODO
+
+        #Arguments:
+        #    direct: If False or 0, disable direct sampling.  If 'i' or 1,
+        #        use ADC I input.  If 'q' or 2, use ADC Q input.
+        """        
+        result = librtlsdr.rtlsdr_set_dithering(self.dev_p, int(dithering))
+        if result < 0:
+            raise LibUSBError(result, 'Could not set dithering')
+
+        return result
 
     def set_direct_sampling(self, direct):
         """Enable direct sampling.

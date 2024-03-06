@@ -173,6 +173,7 @@ except AttributeError:
 # int rtlsdr_reset_buffer(rtlsdr_dev_t *dev);
 f = librtlsdr.rtlsdr_reset_buffer
 f.restype, f.argtypes = c_int, [p_rtlsdr_dev]
+print(f)
 
 # int rtlsdr_read_sync(rtlsdr_dev_t *dev, void *buf, int len, int *n_read);
 f = librtlsdr.rtlsdr_read_sync
@@ -189,6 +190,19 @@ f.restype, f.argtypes = c_int, [p_rtlsdr_dev, POINTER(rtlsdr_read_async_cb_t), p
 #				 uint32_t buf_len);
 f = librtlsdr.rtlsdr_read_async
 f.restype, f.argtypes = c_int, [p_rtlsdr_dev, rtlsdr_read_async_cb_t, py_object, c_uint, c_uint]
+
+# /*!
+#  * Enable or disable frequency dithering for r820t tuners.
+#  * Must be performed before freq_set().
+#  * Fails for other tuners.
+#  *
+#  * \param dev the device handle given by rtlsdr_open()
+#  * \param on 0 means disabled, 1 enabled
+#  * \return 0 on success
+#  */
+# RTLSDR_API int rtlsdr_set_dithering(rtlsdr_dev_t *dev, int dither);
+f = librtlsdr.rtlsdr_set_dithering
+f.restype, f.argtypes = c_int, [p_rtlsdr_dev, c_int]
 
 # int rtlsdr_cancel_async(rtlsdr_dev_t *dev);
 f = librtlsdr.rtlsdr_cancel_async
